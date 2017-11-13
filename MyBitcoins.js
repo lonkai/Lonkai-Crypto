@@ -6,6 +6,8 @@ var OLD = "Thu, 01 Jun 1970 00:00:00 GMT";
 var zec_show = true;
 var eth_show = true;
 var etc_show = false;
+var btg_show = true;
+var btz_show = false;
 
 var ethermine_show = false;
 var nanopool_show = true;
@@ -38,6 +40,8 @@ document.onreadystatechange = function() {
             System.Gadget.Settings.write("zec_show", zec_show);
             System.Gadget.Settings.write("eth_show", eth_show);
             System.Gadget.Settings.write("etc_show", etc_show);
+            System.Gadget.Settings.write("btg_show", btg_show);
+            System.Gadget.Settings.write("btz_show", btz_show);
 
             System.Gadget.Settings.write('ethermine_show', ethermine_show);
             System.Gadget.Settings.write('nanopool_show', nanopool_show);
@@ -60,6 +64,8 @@ function updateExchangeData() {
     zec_show = System.Gadget.Settings.read("zec_show");
     eth_show = System.Gadget.Settings.read("eth_show");
     etc_show = System.Gadget.Settings.read("etc_show");
+    btg_show = System.Gadget.Settings.read("btg_show");
+    btz_show = System.Gadget.Settings.read("btz_show");
 
     ethermine_show = System.Gadget.Settings.read("ethermine_show");
     nanopool_show = System.Gadget.Settings.read("nanopool_show");
@@ -69,6 +75,8 @@ function updateExchangeData() {
     document.getElementById('EthDIV').style.display =  "none";
     document.getElementById('EtcDIV').style.display =  "none";
     document.getElementById('EthNanoDIV').style.display =  "none";
+    document.getElementById('BtgDIV').style.display =  "none";
+    document.getElementById('BtzDIV').style.display =  "none";
 
     if (zec_show) {
         i = i + 1;
@@ -85,20 +93,25 @@ function updateExchangeData() {
             document.getElementById('EthNanoDIV').style.display =  "block";
         }
     }
-
     if (etc_show) {
         i = i + 1;
         document.getElementById('EtcDIV').style.display =  "block";
     }
-    
+    if (btg_show) {
+        document.getElementById('BtgDIV').style.display =  "block";
+    }
+    if (btz_show) {
+        document.getElementById('BtzDIV').style.display =  "block";
+    }
+
     if (i === 0) {
-        document.body.style.height = "130px";
+        document.body.style.height = "140px";
     }
     else if (i === 1) {
-        document.body.style.height = "235px";
+        document.body.style.height = "280px";
     }
     else {
-        document.body.style.height = "338px";
+        document.body.style.height = "348px";
     }
 
     if (System.Gadget.Settings.readString("zec_addr")) {
@@ -131,6 +144,17 @@ function updateExchangeData() {
             if (xmlhttpBch.readyState == 4 && xmlhttpBch.status == 200) {
                 document.getElementById('bch').innerText = parse(xmlhttpBch, "USD", 0).toFixed(0) + "$";
                 document.getElementById('bch_btc').innerText = parse(xmlhttpBch, "BTC", 0).toFixed(3);
+            }
+        };
+
+        xmlhttpBtg = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpBtg.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=BTG&tsyms=USD,BTC", true);
+        xmlhttpBtg.setRequestHeader(IMS, OLD);
+        xmlhttpBtg.send();
+        xmlhttpBtg.onReadyStateChange = function() {                 
+            if (xmlhttpBtg.readyState == 4 && xmlhttpBtg.status == 200) {
+                document.getElementById('btg').innerText = parse(xmlhttpBtg, "USD", 0).toFixed(0) + "$";
+                document.getElementById('btg_btc').innerText = parse(xmlhttpBtg, "BTC", 0).toFixed(3);
             }
         };
 
@@ -278,33 +302,14 @@ function updateExchangeData() {
         };
 
         xmlHttpEthereumNano = new ActiveXObject("Microsoft.XMLHTTP");
-        xmlHttpEthereumNano.open("GET", "http://btg.altpool.pro/api/worker_stats?GYpRBWZvinNuUtpkV1mbNQg4Qf91oPFRWi");
+        xmlHttpEthereumNano.open("GET", "https://btg.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
         xmlHttpEthereumNano.setRequestHeader(IMS, OLD);
         xmlHttpEthereumNano.send();
         xmlHttpEthereumNano.onReadyStateChange = function() {
             if (xmlHttpEthereumNano.readyState == 4 && xmlHttpEthereumNano.status == 200) {
                 var btg_curr_hash = parse(xmlHttpEthereumNano, "hashrate", 0);
-                var btg_avg_hash = parse(xmlHttpEthereumNano, "h6", 0);
-                var btg_balance = parse(xmlHttpEthereumNano, "balance", 0);
-                // var eth_nano_coins_min = parse(xmlHttpEthereumNano, "coinsPerMin", 0);
-
-                document.getElementById('eth_nano_curr_hash').innerText = eth_nano_curr_hash.toFixed(0) + " MH/s";
-                document.getElementById('eth_nano_avg_hash').innerText = eth_nano_avg_hash.toFixed(0) + " MH/s";
-                document.getElementById('eth_nano_balance').innerText = eth_nano_balance.toFixed(4);
-                // document.getElementById('eth_nano_coins').innerText = (eth_nano_coins_min*60*24*30).toFixed(2);
-
-                var nanoCalcAddress = eth_nano_avg_hash.toFixed(0);
-
-                xmlHttpEthereumNanoCoin = new ActiveXObject("Microsoft.XMLHTTP");
-                xmlHttpEthereumNanoCoin.open("GET", "https://api.nanopool.org/v1/eth/approximated_earnings/" + eth_nano_avg_hash.toFixed(0), true);
-                xmlHttpEthereumNanoCoin.setRequestHeader(IMS, OLD);
-                xmlHttpEthereumNanoCoin.send();
-                xmlHttpEthereumNanoCoin.onReadyStateChange = function() {                 
-                    if (xmlHttpEthereumNanoCoin.readyState == 4 && xmlHttpEthereumNanoCoin.status == 200) {
-                        // document.getElementById('eth_nano_coins').innerText = nanoCalcAddress;
-                        document.getElementById('eth_nano_coins').innerText = parse(xmlHttpEthereumNano, "data.minute.coins", 0);
-                    }
-                };
+                btg_curr_hash = (btg_curr_hash/1000).toFixed(0) + " H/s"
+                document.getElementById('btg_curr_hash').innerText = btg_curr_hash;
             }
         };
     } catch (ex) {

@@ -7,6 +7,8 @@ function load() {
     document.getElementById('zec_show').checked = System.Gadget.Settings.read("zec_show");
     document.getElementById('eth_show').checked = System.Gadget.Settings.read("eth_show");
     document.getElementById('etc_show').checked = System.Gadget.Settings.read("etc_show");
+    document.getElementById('btg_show').checked = System.Gadget.Settings.read("btg_show");
+    document.getElementById('btz_show').checked = System.Gadget.Settings.read("btz_show");
     document.getElementById('ethermine_show').checked = System.Gadget.Settings.read("ethermine_show");
     document.getElementById('nanopool_show').checked = System.Gadget.Settings.read("nanopool_show");
     if (document.getElementById('eth_show').checked) {
@@ -62,6 +64,8 @@ function onClosing(event) {
         System.Gadget.Settings.write("zec_show", document.getElementById("zec_show").checked);
         System.Gadget.Settings.write("eth_show", document.getElementById("eth_show").checked);
         System.Gadget.Settings.write("etc_show", document.getElementById("etc_show").checked);
+        System.Gadget.Settings.write("btg_show", document.getElementById("btg_show").checked);
+        System.Gadget.Settings.write("btz_show", document.getElementById("btz_show").checked);
 
         System.Gadget.Settings.write("ethermine_show", document.getElementById("ethermine_show").checked);
         System.Gadget.Settings.write("nanopool_show", document.getElementById("nanopool_show").checked);
