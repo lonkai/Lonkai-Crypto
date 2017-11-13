@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  width: 278px;
+  height: 320px;
+  overflow: auto;
+}
+
+h1 {
+  font-size: 11pt;
+  margin-bottom: 5pt;
+}
+
+div {
+  margin: 0 10px 6px 10px;
+}
+
+form {
+  margin: 0;
+}
+
+.text {
+  margin-top: 2px;
+  width: 241px;
+}
+
+textarea {
+  margin-top: 2px;
+  width: 241px;
+  height: 80px;
+  overflow: auto;
+}
+
+select {
+  margin-top: 2px;
+}
+
+.general {
+  margin-left: 0;
+}
+
+.generalInput {
+  width: 251px;
+}
+
+.radioInputSpan {
+  margin: 2px 0 2px 0;
+}
+
+.radioInput {
+  vertical-align: middle;
+  width: 30px;
+}
+
+.radioInputSubmit {
+  width: 120px;
+}
+
+.small {
+  width: 40px;
+}
+
+.bigger {
+  width: 50px;
+}
+
+#smallish {
+  font-size: 9pt;
+}
+
+#bottomField {
+  width: 18px;
+}
+
+.resetInput {
+  vertical-align: middle;
+  width: 30px;
+}
+
+.resetInputSubmit {
+  width: 150px;
+}

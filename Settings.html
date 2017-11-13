@@ -1,0 +1,44 @@
+﻿<html>
+<head>
+    <title>Lonkai Crypto Settings</title>
+    <meta http-equiv="Content-Type" content="text/html;" />
+    <script src="Settings.js" type="text/javascript" language="javascript"></script>
+    <link href="Settings.css"  type="text/css" rel="stylesheet" />
+</head>
+<body onload="load()">
+    <div>
+        <img src="http://coinmarketcap.com//static/img/coins/16x16/zcash.png">:
+        <input type="checkbox" onclick="check('zec_show')" id="zec_show">
+        <img src="http://coinmarketcap.com//static/img/coins/16x16/ethereum.png">:
+        <input type="checkbox" onclick="check('eth_show')" id="eth_show">
+        <img src="http://coinmarketcap.com//static/img/coins/16x16/ethereum-classic.png">:
+        <input type="checkbox" onclick="check('etc_show')" id="etc_show">
+    </div>
+    <div id="ethereum">
+        Ethermine:
+        <input type="checkbox" onclick="checkEth('ethermine_show')" id="ethermine_show">
+        Nanopool:
+        <input type="checkbox" onclick="checkEth('nanopool_show')" id="nanopool_show">
+    </div>
+    <div>
+        ZEC Address:<br />
+        <input type="text" class="text" id="zec_addr"/>
+    </div>
+    <div>
+        ETH Address:<br />
+        <input type="text" class="text" id="eth_addr"/>
+    </div>
+    <div>
+        ETC Address:<br />
+        <input type="text" class="text" id="etc_addr"/>
+    </div>
+    <h1>Like it?</h1>
+    <div class="general">You can support it by sending any amount of bitcoins to the following Bitcoin address:</div>
+    <div class="general">
+    <input type="text" class="generalInput" id="smallish" readonly="readonly" value="1L3B1sTKCeJfAMjAoprjGZ96jJUd5fufXf"
+        onfocus="onFocus(this);" onblur="onBlur();" />
+    </div>
+    <div class="general" style="display:none;" id="noteCopied">Address has been copied to the clipboard. Thanks!</div>
+    <div class="general" style="display:none;" id="noteNotCopied">Press CTRL-C to copy address to the clipboard.</div>
+</body>
+</html>
