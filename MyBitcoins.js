@@ -108,10 +108,10 @@ function updateExchangeData() {
         document.body.style.height = "140px";
     }
     else if (i === 1) {
-        document.body.style.height = "280px";
+        document.body.style.height = "275px";
     }
     else {
-        document.body.style.height = "348px";
+        document.body.style.height = "370px";
     }
 
     if (System.Gadget.Settings.readString("zec_addr")) {
@@ -230,6 +230,37 @@ function updateExchangeData() {
             }
         };
 
+        xmlHttpEthereumNano = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttpEthereumNano.open("GET", "https://api.nanopool.org/v1/eth/user/" + eth_addr, true);
+        xmlHttpEthereumNano.setRequestHeader(IMS, OLD);
+        xmlHttpEthereumNano.send();
+        xmlHttpEthereumNano.onReadyStateChange = function() {
+            if (xmlHttpEthereumNano.readyState == 4 && xmlHttpEthereumNano.status == 200) {
+                var eth_nano_curr_hash = parse(xmlHttpEthereumNano, "hashrate", 0);
+                var eth_nano_avg_hash = parse(xmlHttpEthereumNano, "h6", 0);
+                var eth_nano_balance = parse(xmlHttpEthereumNano, "balance", 0);
+                // var eth_nano_coins_min = parse(xmlHttpEthereumNano, "coinsPerMin", 0);
+
+                document.getElementById('eth_nano_curr_hash').innerText = eth_nano_curr_hash.toFixed(0) + " MH/s";
+                document.getElementById('eth_nano_avg_hash').innerText = eth_nano_avg_hash.toFixed(0) + " MH/s";
+                document.getElementById('eth_nano_balance').innerText = eth_nano_balance.toFixed(4);
+                // document.getElementById('eth_nano_coins').innerText = (eth_nano_coins_min*60*24*30).toFixed(2);
+                var nanoCalcAddress = eth_nano_avg_hash.toFixed(0);
+
+                xmlHttpEthereumNanoCoin = new ActiveXObject("Microsoft.XMLHTTP");
+                xmlHttpEthereumNanoCoin.open("GET", "https://api.nanopool.org/v1/eth/approximated_earnings/" + nanoCalcAddress, true);
+                xmlHttpEthereumNanoCoin.setRequestHeader(IMS, OLD);
+                xmlHttpEthereumNanoCoin.send();
+                xmlHttpEthereumNanoCoin.onReadyStateChange = function() {                 
+                    if (xmlHttpEthereumNanoCoin.readyState == 4 && xmlHttpEthereumNanoCoin.status == 200) {
+                        document.getElementById('eth_nano_coins').innerText = parse(xmlHttpEthereumNanoCoin, "data.month.coins", 0);
+                    }
+                };
+            }
+        };
+
+
+
         xmlHttpEthereum = new ActiveXObject("Microsoft.XMLHTTP");
         xmlHttpEthereum.open("GET", "https://api.ethermine.org/miner/" + eth_addr + "/currentStats", true);
         xmlHttpEthereum.setRequestHeader(IMS, OLD);
@@ -270,44 +301,13 @@ function updateExchangeData() {
             }
         };
 
-        xmlHttpEthereumNano = new ActiveXObject("Microsoft.XMLHTTP");
-        xmlHttpEthereumNano.open("GET", "https://api.nanopool.org/v1/eth/user/" + eth_addr);
-        xmlHttpEthereumNano.setRequestHeader(IMS, OLD);
-        xmlHttpEthereumNano.send();
-        xmlHttpEthereumNano.onReadyStateChange = function() {
-            if (xmlHttpEthereumNano.readyState == 4 && xmlHttpEthereumNano.status == 200) {
-                var eth_nano_curr_hash = parse(xmlHttpEthereumNano, "hashrate", 0);
-                var eth_nano_avg_hash = parse(xmlHttpEthereumNano, "h6", 0);
-                var eth_nano_balance = parse(xmlHttpEthereumNano, "balance", 0);
-                // var eth_nano_coins_min = parse(xmlHttpEthereumNano, "coinsPerMin", 0);
-
-                document.getElementById('eth_nano_curr_hash').innerText = eth_nano_curr_hash.toFixed(0) + " MH/s";
-                document.getElementById('eth_nano_avg_hash').innerText = eth_nano_avg_hash.toFixed(0) + " MH/s";
-                document.getElementById('eth_nano_balance').innerText = eth_nano_balance.toFixed(4);
-                // document.getElementById('eth_nano_coins').innerText = (eth_nano_coins_min*60*24*30).toFixed(2);
-
-                var nanoCalcAddress = eth_nano_avg_hash.toFixed(0);
-
-                xmlHttpEthereumNanoCoin = new ActiveXObject("Microsoft.XMLHTTP");
-                xmlHttpEthereumNanoCoin.open("GET", "https://api.nanopool.org/v1/eth/approximated_earnings/" + eth_nano_avg_hash.toFixed(0), true);
-                xmlHttpEthereumNanoCoin.setRequestHeader(IMS, OLD);
-                xmlHttpEthereumNanoCoin.send();
-                xmlHttpEthereumNanoCoin.onReadyStateChange = function() {                 
-                    if (xmlHttpEthereumNanoCoin.readyState == 4 && xmlHttpEthereumNanoCoin.status == 200) {
-                        // document.getElementById('eth_nano_coins').innerText = nanoCalcAddress;
-                        document.getElementById('eth_nano_coins').innerText = parse(xmlHttpEthereumNano, "data.minute.coins", 0);
-                    }
-                };
-            }
-        };
-
-        xmlHttpEthereumNano = new ActiveXObject("Microsoft.XMLHTTP");
-        xmlHttpEthereumNano.open("GET", "https://btg.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
-        xmlHttpEthereumNano.setRequestHeader(IMS, OLD);
-        xmlHttpEthereumNano.send();
-        xmlHttpEthereumNano.onReadyStateChange = function() {
-            if (xmlHttpEthereumNano.readyState == 4 && xmlHttpEthereumNano.status == 200) {
-                var btg_curr_hash = parse(xmlHttpEthereumNano, "hashrate", 0);
+        xmlHttpBitcoinGold = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttpBitcoinGold.open("GET", "https://btg.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
+        xmlHttpBitcoinGold.setRequestHeader(IMS, OLD);
+        xmlHttpBitcoinGold.send();
+        xmlHttpBitcoinGold.onReadyStateChange = function() {
+            if (xmlHttpBitcoinGold.readyState == 4 && xmlHttpBitcoinGold.status == 200) {
+                var btg_curr_hash = parse(xmlHttpBitcoinGold, "hashrate", 0);
                 btg_curr_hash = (btg_curr_hash/1000).toFixed(0) + " H/s"
                 document.getElementById('btg_curr_hash').innerText = btg_curr_hash;
             }
