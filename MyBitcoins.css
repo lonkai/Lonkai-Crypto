@@ -114,14 +114,10 @@ div.valueBackground2 {
   z-index: -100;
 }
 
-#zec_last_seen, #eth_last_seen {
+#zec_last_seen, #eth_last_seen, #etc_last_seen {
   font-size: 9px;
 }
 
-.red {
-  color: #800000;
-}
-
-.green {
-  color: #008000;
+#BtzDIV, #BtgDIV, #ZenDIV {
+  border-top: #111 solid 1px;
 }

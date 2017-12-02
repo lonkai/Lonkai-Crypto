@@ -3,17 +3,18 @@ var MAX_DECIMALS = 6;
 var IMS = "If-Modified-Since";
 var OLD = "Thu, 01 Jun 1970 00:00:00 GMT";
 
-var zec_show = true;
-var eth_show = true;
-var etc_show = false;
+var zec_show = false;
+var eth_show = false;
+var etc_show = true;
 var btg_show = true;
 var btz_show = false;
+var zen_show = false;
 
 var ethermine_show = false;
 var nanopool_show = true;
 var zec_addr = "t1aPosjaW4e2UHrnj5mXsHureUBnX1jLyuQ";
 var eth_addr = "e2d07294df04dae81aaef23a7194a3bd511a40bd";
-var etc_addr = "";
+var etc_addr = "0x7310270fb1b0f5fb4303cdbd6ca05ff9c35997cf";
 
 // update intervals
 var ONE_SEC = 1000;  // 1 sec
@@ -42,6 +43,7 @@ document.onreadystatechange = function() {
             System.Gadget.Settings.write("etc_show", etc_show);
             System.Gadget.Settings.write("btg_show", btg_show);
             System.Gadget.Settings.write("btz_show", btz_show);
+            System.Gadget.Settings.write("zen_show", zen_show);
 
             System.Gadget.Settings.write('ethermine_show', ethermine_show);
             System.Gadget.Settings.write('nanopool_show', nanopool_show);
@@ -66,17 +68,19 @@ function updateExchangeData() {
     etc_show = System.Gadget.Settings.read("etc_show");
     btg_show = System.Gadget.Settings.read("btg_show");
     btz_show = System.Gadget.Settings.read("btz_show");
+    zen_show = System.Gadget.Settings.read("zen_show");
 
     ethermine_show = System.Gadget.Settings.read("ethermine_show");
     nanopool_show = System.Gadget.Settings.read("nanopool_show");
 
     i = 0;
-    document.getElementById('ZecDIV').style.display =  "none";
-    document.getElementById('EthDIV').style.display =  "none";
-    document.getElementById('EtcDIV').style.display =  "none";
-    document.getElementById('EthNanoDIV').style.display =  "none";
-    document.getElementById('BtgDIV').style.display =  "none";
-    document.getElementById('BtzDIV').style.display =  "none";
+    document.getElementById('ZecDIV').style.display = "none";
+    document.getElementById('EthDIV').style.display = "none";
+    document.getElementById('EtcDIV').style.display = "none";
+    document.getElementById('EthNanoDIV').style.display = "none";
+    document.getElementById('BtgDIV').style.display = "none";
+    document.getElementById('BtzDIV').style.display = "none";
+    document.getElementById('ZenDIV').style.display = "none";
 
     if (zec_show) {
         i = i + 1;
@@ -103,15 +107,18 @@ function updateExchangeData() {
     if (btz_show) {
         document.getElementById('BtzDIV').style.display =  "block";
     }
+    if (zen_show) {
+        document.getElementById('ZenDIV').style.display =  "block";
+    }
 
     if (i === 0) {
-        document.body.style.height = "140px";
+        document.body.style.height = "195px";
     }
     else if (i === 1) {
-        document.body.style.height = "275px";
+        document.body.style.height = "300px";
     }
     else {
-        document.body.style.height = "370px";
+        document.body.style.height = "400px";
     }
 
     if (System.Gadget.Settings.readString("zec_addr")) {
@@ -188,6 +195,17 @@ function updateExchangeData() {
             if (xmlhttpZec.readyState == 4 && xmlhttpZec.status == 200) {
                 document.getElementById('zec').innerText = parse(xmlhttpZec, "USD", 0).toFixed(0) + "$";
                 document.getElementById('zec_btc').innerText = parse(xmlhttpZec, "BTC", 0).toFixed(3);
+            }
+        };
+
+        xmlhttpZen = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpZen.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ZEN&tsyms=USD,BTC,ETH", true);
+        xmlhttpZen.setRequestHeader(IMS, OLD);
+        xmlhttpZen.send();
+        xmlhttpZen.onReadyStateChange = function() {                 
+            if (xmlhttpZen.readyState == 4 && xmlhttpZen.status == 200) {
+                document.getElementById('zen').innerText = parse(xmlhttpZen, "USD", 0).toFixed(0) + "$";
+                document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(3);
             }
         };
 
@@ -301,6 +319,46 @@ function updateExchangeData() {
             }
         };
 
+        xmlHttpETC = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttpETC.open("GET", "https://api-etc.ethermine.org/miner/" + etc_addr + "/currentStats", true);
+        xmlHttpETC.setRequestHeader(IMS, OLD);
+        xmlHttpETC.send();
+        xmlHttpETC.onReadyStateChange = function() {
+            if (xmlHttpETC.readyState == 4 && xmlHttpETC.status == 200) {
+                var etc_curr_hash = parse(xmlHttpETC, "currentHashrate", 0);
+                var etc_avg_hash = parse(xmlHttpETC, "averageHashrate", 0);
+                var etc_last_seen = parse(xmlHttpETC, "lastSeen", 0);
+                var etc_coins_min = parse(xmlHttpETC, "coinsPerMin", 0);
+                var etc_active = parse(xmlHttpETC, "activeWorkers", 0);
+
+                // Create a new JavaScript Date object based on the timestamp
+                // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+                var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                var date = new Date(etc_last_seen*1000);
+                // Hours part from the timestamp
+                var hours = date.getHours();
+                if (hours < 10) {
+                    hours = "0" + hours;
+                }
+                // Minutes part from the timestamp
+                var minutes = date.getMinutes();
+                if (minutes < 10) {
+                    minutes = "0" + minutes;
+                }
+                var day = date.getDate();
+                var month = months[date.getMonth()];
+
+                var formattedTime = day + month + " " + hours + ':' + minutes;
+                etc_curr_hash = String(etc_curr_hash / 1000000);
+                etc_avg_hash = String(etc_avg_hash / 1000000);
+                document.getElementById('etc_curr_hash').innerText = etc_curr_hash.substring(0, etc_curr_hash.indexOf(".")) + " MH/s";
+                document.getElementById('etc_avg_hash').innerText = etc_avg_hash.substring(0, etc_avg_hash.indexOf(".")) + " MH/s";
+                document.getElementById('etc_last_seen').innerText = formattedTime;
+                document.getElementById('etc_coins').innerText = (etc_coins_min*60*24*30).toFixed(2);                
+                document.getElementById('etc_active').innerText = etc_active;
+            }
+        };
+
         xmlHttpBitcoinGold = new ActiveXObject("Microsoft.XMLHTTP");
         xmlHttpBitcoinGold.open("GET", "https://btg.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
         xmlHttpBitcoinGold.setRequestHeader(IMS, OLD);
@@ -310,6 +368,17 @@ function updateExchangeData() {
                 var btg_curr_hash = parse(xmlHttpBitcoinGold, "hashrate", 0);
                 btg_curr_hash = (btg_curr_hash/1000).toFixed(0) + " H/s"
                 document.getElementById('btg_curr_hash').innerText = btg_curr_hash;
+            }
+        };
+        xmlHttpZen = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttpZen.open("GET", "https://zen.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
+        xmlHttpZen.setRequestHeader(IMS, OLD);
+        xmlHttpZen.send();
+        xmlHttpZen.onReadyStateChange = function() {
+            if (xmlHttpZen.readyState == 4 && xmlHttpZen.status == 200) {
+                var zen_curr_hash = parse(xmlHttpZen, "hashrate", 0);
+                zen_curr_hash = (zen_curr_hash/1000).toFixed(0) + " H/s"
+                document.getElementById('zen_curr_hash').innerText = zen_curr_hash;
             }
         };
     } catch (ex) {
