@@ -311,8 +311,8 @@ function updateExchangeData() {
                 var formattedTime = day + month + " " + hours + ':' + minutes;
                 eth_curr_hash = String(eth_curr_hash / 1000000);
                 eth_avg_hash = String(eth_avg_hash / 1000000);
-                document.getElementById('eth_curr_hash').innerText = eth_curr_hash.substring(0, eth_curr_hash.indexOf(".")) + " MH/s";
-                document.getElementById('eth_avg_hash').innerText = eth_avg_hash.substring(0, eth_avg_hash.indexOf(".")) + " MH/s";
+                document.getElementById('eth_curr_hash').innerText = Number(eth_curr_hash).toFixed(0) + " MH/s";
+                document.getElementById('eth_avg_hash').innerText = Number(eth_avg_hash).toFixed(0) + " MH/s";
                 document.getElementById('eth_last_seen').innerText = formattedTime;
                 document.getElementById('eth_coins').innerText = (eth_coins_min*60*24*30).toFixed(2);                
                 document.getElementById('eth_active').innerText = eth_active;
@@ -351,8 +351,8 @@ function updateExchangeData() {
                 var formattedTime = day + month + " " + hours + ':' + minutes;
                 etc_curr_hash = String(etc_curr_hash / 1000000);
                 etc_avg_hash = String(etc_avg_hash / 1000000);
-                document.getElementById('etc_curr_hash').innerText = etc_curr_hash.substring(0, etc_curr_hash.indexOf(".")) + " MH/s";
-                document.getElementById('etc_avg_hash').innerText = etc_avg_hash.substring(0, etc_avg_hash.indexOf(".")) + " MH/s";
+                document.getElementById('etc_curr_hash').innerText = Number(etc_curr_hash).toFixed(0) + " MH/s";
+                document.getElementById('etc_avg_hash').innerText = Number(etc_avg_hash).toFixed(0) + " MH/s";
                 document.getElementById('etc_last_seen').innerText = formattedTime;
                 document.getElementById('etc_coins').innerText = (etc_coins_min*60*24*30).toFixed(2);                
                 document.getElementById('etc_active').innerText = etc_active;
