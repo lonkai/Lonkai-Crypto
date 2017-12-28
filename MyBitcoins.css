@@ -8,7 +8,7 @@ body {
   padding: 5px;
   background: url(background.png) no-repeat;
   width: 125px;
-  height: 350px;
+  height: 175px;
   border: black solid 2px;
   border-radius: 50px;
 }
@@ -114,7 +114,7 @@ div.valueBackground2 {
   z-index: -100;
 }
 
-#zec_last_seen, #eth_last_seen, #etc_last_seen {
+#zec_last_seen, #eth_last_seen, #etc_last_seen, #btz_last_seen {
   font-size: 9px;
 }
 
