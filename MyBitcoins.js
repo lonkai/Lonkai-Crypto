@@ -6,7 +6,7 @@ var OLD = "Thu, 01 Jun 1970 00:00:00 GMT";
 var zec_show = false;
 var etc_show = false;
 var btg_show = false;
-var btz_show = true;
+var btz_show = false;
 var zen_show = false;
 
 var eth_show = true;
@@ -208,11 +208,30 @@ function updateExchangeData() {
                 document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(3);
             }
         };
+        xmlhttpZcl = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpZcl.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ZCL&tsyms=USD,BTC,ETH", true);
+        xmlhttpZcl.setRequestHeader(IMS, OLD);
+        xmlhttpZcl.send();
+        xmlhttpZcl.onReadyStateChange = function() {                 
+            if (xmlhttpZcl.readyState == 4 && xmlhttpZcl.status == 200) {
+                document.getElementById('zcl').innerText = parse(xmlhttpZcl, "USD", 0).toFixed(0) + "$";
+                document.getElementById('zcl_btc').innerText = parse(xmlhttpZcl, "BTC", 0).toFixed(3);
+            }
+        };
+        xmlhttpZen = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpZen.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ZEN&tsyms=USD,BTC,ETH", true);
+        xmlhttpZen.setRequestHeader(IMS, OLD);
+        xmlhttpZen.send();
+        xmlhttpZen.onReadyStateChange = function() {                 
+            if (xmlhttpZen.readyState == 4 && xmlhttpZen.status == 200) {
+                document.getElementById('zen').innerText = parse(xmlhttpZen, "USD", 0).toFixed(0) + "$";
+                document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(3);
+            }
+        };
         xmlHttpBTCZ = new ActiveXObject("Microsoft.XMLHTTP");
         xmlHttpBTCZ.open("GET", "http://pool.bitcoinzguiding.ovh/api/worker_stats?t1TtaSf9NiLepNLRw5heMCuvLfueuBpG6zH", true);
         xmlHttpBTCZ.setRequestHeader(IMS, OLD);
         xmlHttpBTCZ.send();
-        document.getElementById('btz_curr_hash').innerText = "";
         xmlHttpBTCZ.onReadyStateChange = function() {
             if (xmlHttpBTCZ.readyState == 4 && xmlHttpBTCZ.status == 200) {
                 var btz_curr_hash = parse(xmlHttpBTCZ, "hashrateString", 0);
@@ -227,7 +246,6 @@ function updateExchangeData() {
         xmlHttpZcash.open("GET", "https://api-zcash.flypool.org/miner/" + zec_addr + "/currentstats", true);
         xmlHttpZcash.setRequestHeader(IMS, OLD);
         xmlHttpZcash.send();
-        document.getElementById('zec_curr_hash').innerText = "";
         xmlHttpZcash.onReadyStateChange = function() {
             if (xmlHttpZcash.readyState == 4 && xmlHttpZcash.status == 200) {
                 var zec_curr_hash = parse(xmlHttpZcash, "currentHashrate", 0);
@@ -267,7 +285,6 @@ function updateExchangeData() {
         xmlHttpEthereumNano.open("GET", "https://api.nanopool.org/v1/eth/user/" + eth_addr, true);
         xmlHttpEthereumNano.setRequestHeader(IMS, OLD);
         xmlHttpEthereumNano.send();
-        document.getElementById('eth_nano_curr_hash').innerText = "";
         xmlHttpEthereumNano.onReadyStateChange = function() {
             if (xmlHttpEthereumNano.readyState == 4 && xmlHttpEthereumNano.status == 200) {
                 var eth_nano_curr_hash = parse(xmlHttpEthereumNano, "hashrate", 0);
@@ -298,7 +315,6 @@ function updateExchangeData() {
         xmlHttpEthereum.open("GET", "https://api.ethermine.org/miner/" + eth_addr + "/currentStats", true);
         xmlHttpEthereum.setRequestHeader(IMS, OLD);
         xmlHttpEthereum.send();
-        document.getElementById('eth_curr_hash').innerText = "";
         xmlHttpEthereum.onReadyStateChange = function() {
             if (xmlHttpEthereum.readyState == 4 && xmlHttpEthereum.status == 200) {
                 var eth_curr_hash = parse(xmlHttpEthereum, "currentHashrate", 0);
@@ -339,7 +355,6 @@ function updateExchangeData() {
         xmlHttpETC.open("GET", "https://api-etc.ethermine.org/miner/" + etc_addr + "/currentStats", true);
         xmlHttpETC.setRequestHeader(IMS, OLD);
         xmlHttpETC.send();
-        document.getElementById('etc_curr_hash').innerText = "";
         xmlHttpETC.onReadyStateChange = function() {
             if (xmlHttpETC.readyState == 4 && xmlHttpETC.status == 200) {
                 var etc_curr_hash = parse(xmlHttpETC, "currentHashrate", 0);
@@ -380,7 +395,6 @@ function updateExchangeData() {
         xmlHttpBitcoinGold.open("GET", "https://btg.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
         xmlHttpBitcoinGold.setRequestHeader(IMS, OLD);
         xmlHttpBitcoinGold.send();
-        document.getElementById('btg_curr_hash').innerText = "";
         xmlHttpBitcoinGold.onReadyStateChange = function() {
             if (xmlHttpBitcoinGold.readyState == 4 && xmlHttpBitcoinGold.status == 200) {
                 var btg_curr_hash = parse(xmlHttpBitcoinGold, "hashrate", 0);
@@ -392,7 +406,6 @@ function updateExchangeData() {
         xmlHttpZen.open("GET", "https://zen.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
         xmlHttpZen.setRequestHeader(IMS, OLD);
         xmlHttpZen.send();
-        document.getElementById('zen_curr_hash').innerText = "";
         xmlHttpZen.onReadyStateChange = function() {
             if (xmlHttpZen.readyState == 4 && xmlHttpZen.status == 200) {
                 var zen_curr_hash = parse(xmlHttpZen, "hashrate", 0);
