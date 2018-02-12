@@ -4,7 +4,7 @@ var IMS = "If-Modified-Since";
 var OLD = "Thu, 01 Jun 1970 00:00:00 GMT";
 
 var zec_show = false;
-var etc_show = false;
+var etc_show = true;
 var btg_show = false;
 var btz_show = false;
 var zen_show = false;
@@ -14,7 +14,7 @@ var ethermine_show = false;
 var nanopool_show = true;
 var zec_addr = "t1aPosjaW4e2UHrnj5mXsHureUBnX1jLyuQ";
 var eth_addr = "e2d07294df04dae81aaef23a7194a3bd511a40bd";
-var etc_addr = "0x7310270fb1b0f5fb4303cdbd6ca05ff9c35997cf";
+var etc_addr = "0x42bf31f75b0d1b2bfa0c41e62470d2bba007b99a";
 
 // update intervals
 var ONE_SEC = 1000;  // 1 sec
@@ -151,7 +151,7 @@ function updateExchangeData() {
         xmlhttpBch.onReadyStateChange = function() {                 
             if (xmlhttpBch.readyState == 4 && xmlhttpBch.status == 200) {
                 document.getElementById('bch').innerText = parse(xmlhttpBch, "USD", 0).toFixed(0) + "$";
-                document.getElementById('bch_btc').innerText = parse(xmlhttpBch, "BTC", 0).toFixed(3);
+                document.getElementById('bch_btc').innerText = parse(xmlhttpBch, "BTC", 0).toFixed(4);
             }
         };
 
@@ -162,7 +162,7 @@ function updateExchangeData() {
         xmlhttpBtg.onReadyStateChange = function() {                 
             if (xmlhttpBtg.readyState == 4 && xmlhttpBtg.status == 200) {
                 document.getElementById('btg').innerText = parse(xmlhttpBtg, "USD", 0).toFixed(0) + "$";
-                document.getElementById('btg_btc').innerText = parse(xmlhttpBtg, "BTC", 0).toFixed(3);
+                document.getElementById('btg_btc').innerText = parse(xmlhttpBtg, "BTC", 0).toFixed(4);
             }
         };
 
@@ -173,7 +173,7 @@ function updateExchangeData() {
         xmlhttpEth.onReadyStateChange = function() {                 
             if (xmlhttpEth.readyState == 4 && xmlhttpEth.status == 200) {
                 document.getElementById('eth').innerText = parse(xmlhttpEth, "USD", 0).toFixed(0) + "$";
-                document.getElementById('eth_btc').innerText = parse(xmlhttpEth, "BTC", 0).toFixed(3);
+                document.getElementById('eth_btc').innerText = parse(xmlhttpEth, "BTC", 0).toFixed(4);
             }
         };
 
@@ -184,7 +184,7 @@ function updateExchangeData() {
         xmlhttpEtc.onReadyStateChange = function() {                 
             if (xmlhttpEtc.readyState == 4 && xmlhttpEtc.status == 200) {
                 document.getElementById('etc').innerText = parse(xmlhttpEtc, "USD", 0).toFixed(0) + "$";
-                document.getElementById('etc_btc').innerText = parse(xmlhttpEtc, "BTC", 0).toFixed(3);
+                document.getElementById('etc_btc').innerText = parse(xmlhttpEtc, "BTC", 0).toFixed(4);
             }
         };
 
@@ -195,7 +195,7 @@ function updateExchangeData() {
         xmlhttpZec.onReadyStateChange = function() {                 
             if (xmlhttpZec.readyState == 4 && xmlhttpZec.status == 200) {
                 document.getElementById('zec').innerText = parse(xmlhttpZec, "USD", 0).toFixed(0) + "$";
-                document.getElementById('zec_btc').innerText = parse(xmlhttpZec, "BTC", 0).toFixed(3);
+                document.getElementById('zec_btc').innerText = parse(xmlhttpZec, "BTC", 0).toFixed(4);
             }
         };
         xmlhttpZen = new ActiveXObject("Microsoft.XMLHTTP");
@@ -205,7 +205,7 @@ function updateExchangeData() {
         xmlhttpZen.onReadyStateChange = function() {                 
             if (xmlhttpZen.readyState == 4 && xmlhttpZen.status == 200) {
                 document.getElementById('zen').innerText = parse(xmlhttpZen, "USD", 0).toFixed(0) + "$";
-                document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(3);
+                document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(4);
             }
         };
         xmlhttpZcl = new ActiveXObject("Microsoft.XMLHTTP");
@@ -215,7 +215,7 @@ function updateExchangeData() {
         xmlhttpZcl.onReadyStateChange = function() {                 
             if (xmlhttpZcl.readyState == 4 && xmlhttpZcl.status == 200) {
                 document.getElementById('zcl').innerText = parse(xmlhttpZcl, "USD", 0).toFixed(0) + "$";
-                document.getElementById('zcl_btc').innerText = parse(xmlhttpZcl, "BTC", 0).toFixed(3);
+                document.getElementById('zcl_btc').innerText = parse(xmlhttpZcl, "BTC", 0).toFixed(4);
             }
         };
         xmlhttpZen = new ActiveXObject("Microsoft.XMLHTTP");
@@ -225,7 +225,7 @@ function updateExchangeData() {
         xmlhttpZen.onReadyStateChange = function() {                 
             if (xmlhttpZen.readyState == 4 && xmlhttpZen.status == 200) {
                 document.getElementById('zen').innerText = parse(xmlhttpZen, "USD", 0).toFixed(0) + "$";
-                document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(3);
+                document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(4);
             }
         };
         xmlHttpBTCZ = new ActiveXObject("Microsoft.XMLHTTP");
@@ -351,43 +351,22 @@ function updateExchangeData() {
             }
         };
 
-        xmlHttpETC = new ActiveXObject("Microsoft.XMLHTTP");
-        xmlHttpETC.open("GET", "https://api-etc.ethermine.org/miner/" + etc_addr + "/currentStats", true);
-        xmlHttpETC.setRequestHeader(IMS, OLD);
-        xmlHttpETC.send();
-        xmlHttpETC.onReadyStateChange = function() {
-            if (xmlHttpETC.readyState == 4 && xmlHttpETC.status == 200) {
-                var etc_curr_hash = parse(xmlHttpETC, "currentHashrate", 0);
-                var etc_avg_hash = parse(xmlHttpETC, "averageHashrate", 0);
-                var etc_last_seen = parse(xmlHttpETC, "lastSeen", 0);
-                var etc_coins_min = parse(xmlHttpETC, "coinsPerMin", 0);
-                var etc_active = parse(xmlHttpETC, "activeWorkers", 0);
+        xmlHttpEthereumClsNano = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttpEthereumClsNano.open("GET", "https://api.nanopool.org/v1/etc/user/" + etc_addr, true);
+        xmlHttpEthereumClsNano.setRequestHeader(IMS, OLD);
+        xmlHttpEthereumClsNano.send();
+        xmlHttpEthereumClsNano.onReadyStateChange = function() {
+            if (xmlHttpEthereumClsNano.readyState == 4 && xmlHttpEthereumClsNano.status == 200) {
+                var etc_nano_curr_hash = parse(xmlHttpEthereumClsNano, "hashrate", 0);
+                var etc_nano_avg_hash = parse(xmlHttpEthereumClsNano, "h6", 0);
+                var etc_nano_balance = parse(xmlHttpEthereumClsNano, "balance", 0);
+                // var etc_nano_coins_min = parse(xmlHttpEthereumClsNano, "coinsPerMin", 0);
 
-                // Create a new JavaScript Date object based on the timestamp
-                // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-                var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                var date = new Date(etc_last_seen*1000);
-                // Hours part from the timestamp
-                var hours = date.getHours();
-                if (hours < 10) {
-                    hours = "0" + hours;
-                }
-                // Minutes part from the timestamp
-                var minutes = date.getMinutes();
-                if (minutes < 10) {
-                    minutes = "0" + minutes;
-                }
-                var day = date.getDate();
-                var month = months[date.getMonth()];
-
-                var formattedTime = day + month + " " + hours + ':' + minutes;
-                etc_curr_hash = String(etc_curr_hash / 1000000);
-                etc_avg_hash = String(etc_avg_hash / 1000000);
-                document.getElementById('etc_curr_hash').innerText = Number(etc_curr_hash).toFixed(0) + " MH/s";
-                document.getElementById('etc_avg_hash').innerText = Number(etc_avg_hash).toFixed(0) + " MH/s";
-                document.getElementById('etc_last_seen').innerText = formattedTime;
-                document.getElementById('etc_coins').innerText = (etc_coins_min*60*24*30).toFixed(2);
-                document.getElementById('etc_active').innerText = etc_active;
+                document.getElementById('etc_nano_curr_hash').innerText = etc_nano_curr_hash.toFixed(0) + " MH/s";
+                document.getElementById('etc_nano_avg_hash').innerText = etc_nano_avg_hash.toFixed(0) + " MH/s";
+                document.getElementById('etc_nano_balance').innerText = etc_nano_balance.toFixed(4);
+                // document.getElementById('etc_nano_coins').innerText = (etc_nano_coins_min*60*24*30).toFixed(2);
+                nanoCalcAddress = etc_nano_avg_hash.toFixed(0);
             }
         };
 

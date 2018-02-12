@@ -13,111 +13,85 @@ body {
   border-radius: 50px;
 }
 
-#descText {
-  padding: 0 5px 0 0;
-  text-align: center;
-  font-size: 8.5pt;
-}
-
-#BtcDIV, #EthDIV, #EtcDIV, #ZecDIV {
-   padding-bottom: 2px;
-}
-
 div.container {
   text-align: center;
   padding-top: 6px;
 }
 
+.value {
+  padding-right: 4px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 13px;
+  color: black;
+}
+
 div.container-middle {
-  text-align: center;
-  padding-top: 17px;
+  padding-top: 5px;
+  padding-left: 15px;
+}
+
+.icon {
+  font-size: 13px;
+  font-weight: bold;
+  width: 10px;
+  padding-right: 2px;
+}
+
+.dollar_column {
+  position: relative;
+  filter: alpha(opacity = 70);
+  background-color: #fff;
+  z-index: -100;
+  width: 44px;
+  line-height: 19px;
 }
 
 td.left {
-  width: 35px;
-  font-size: 11.5pt;
-  text-align: left;
-  color: #E2C7C7;
+  width: auto;
+  line-height: 18px;
+  padding: 0px;
+  text-align: right;
+  font-weight: bold;
+  border: #c0c0c0 1px solid;
 }
 
-td.left div {
+.btc_column {
   position: relative;
-  top: -1px;
-  color: #111;
-  font-weight: bold;
+  filter: alpha(opacity = 70);
+  background-color: #fff;
+  z-index: -100;
+  width: 48px;
+  line-height: 19px;
 }
 
 td.right {
-  width: 41px;
-  line-height: 18px;
-  padding-right: 4px;
-  text-align: right;
-  font-weight: bold;
-  border: #c0c0c0 1px solid;
-}
-
-div.value {
-  color: #111;
-  width: 100%;
-  font-size: 10pt;
-  text-align: right;
-  position: relative;
-}
-
-td.left2 {
   width: auto;
-  padding-right: 2px;
-  font-size: 10pt;
-  text-align: left;
-  color: #E2C7C7;
-}
-
-td.left2 div {
-  position: relative;
-  top: -1px;
-  color: #111;
-  font-weight: bold;
-}
-
-td.right2 {
-  width: 68px;
   line-height: 18px;
-  padding-right: 4px;
+  padding: 0px;
   text-align: right;
   font-weight: bold;
   border: #c0c0c0 1px solid;
 }
 
-div.value2 {
-  color: #111;
-  width: 100%;
-  font-size: 9pt;
-  text-align: right;
+.bitcoin_rate {
+  width: 68px;
   position: relative;
-}
-
-div.valueBackground {
-  position: absolute;
-  width: 73px;
-  height: 18px;
   filter: alpha(opacity = 70);
   background-color: #fff;
   z-index: -100;
+  line-height: 19px;
+  text-align: center;
 }
 
-div.valueBackground2 {
-  position: absolute;
-  width: 45px;
-  height: 18px;
+.mining_stats {
+  width: 84px;
+  position: relative;
   filter: alpha(opacity = 70);
   background-color: #fff;
   z-index: -100;
+  line-height: 19px;
+  text-align: center;
 }
 
-#zec_last_seen, #eth_last_seen, #etc_last_seen, #btz_last_seen {
-  font-size: 9px;
-}
 
-#BtzDIV, #BtgDIV, #ZenDIV {
-  border-top: #111 solid 1px;
-}

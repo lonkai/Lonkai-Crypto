@@ -5,117 +5,212 @@
 <!-- <script src="MyBitcoins.js" type="text/javascript" language="javascript"></script>
 <link href="MyBitcoins.css" type="text/css" rel="stylesheet" /> -->
 <script src="jquery-3.2.1.min.js"></script>
-<script src="../MyBitcoins.js" type="text/javascript" language="javascript"></script>
-<link href="../MyBitcoins.css" type="text/css" rel="stylesheet" />
+<script src="D:\Work\Lonkai Crypto\MyBitcoins.js" type="text/javascript" language="javascript"></script>
+<link href="D:\Work\Lonkai Crypto\MyBitcoins.css" type="text/css" rel="stylesheet" />
 </head>
 <body onload="load()">
 <div class="gadget">
     <div id="desc" style="display: none;"><p id="descText" /></div>
     <div id="container" class="container">
-        <strong>Lonkai Crypto</strong>
+        Lonkai Crypto
         <br>
-        <div>
+        <div class="container-middle">
             <table cellpadding="0" cellspacing="0" border="0">
-                <tr id="topField">
-                    <td class="left2"><img src="icons/bitcoin.png"></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="btc">...</div></td>
+                <tr>
+                    <td class="icon">
+                        <img src="icons/bitcoin.png">
+                    </td>
+                    <td>
+                        <div class="bitcoin_rate">
+                            <div class="value" id="btc">...</div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
         <div>
             <table cellpadding="0" cellspacing="0" border="0">
-                <tr id="topField">
-                    <td class="left2"><img src="icons/bitcoin-cash.png"></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="bch">...</div></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="bch_btc">...</div></td>
+                <tr>
+                    <td class="icon">
+                        <img src="icons/bitcoin-cash.png">
+                    </td>
+                    <td class="left">
+                        <div class="dollar_column">
+                            <div class="value" id="bch">...</div>
+                        </div>
+                    </td>
+                    <td class="right"> 
+                        <div class="btc_column">
+                            <div class="value" id="bch_btc">...</div>
+                        </div>
+                    </td>
                 </tr>
-                <tr id="topField">
-                    <td class="left2"><img src="icons/bitcoin-gold.png"></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="btg">...</div></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="btg_btc">...</div></td>
+                <tr>
+                    <td class="icon">
+                        <img src="icons/bitcoin-gold_black.png">
+                    </td>
+                    <td class="left">
+                        <div class="dollar_column">
+                            <div class="value" id="btg">...</div>
+                        </div>
+                    </td>
+                    <td class="right"> 
+                        <div class="btc_column">
+                            <div class="value" id="btg_btc">...</div>
+                        </div>
+                    </td>
                 </tr>
-                <tr id="topField">
-                    <td class="left2"><img src="icons/ethereum.png"></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="eth">...</div></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="eth_btc">...</div></td>
+                <tr>
+                    <td class="icon">
+                        <img src="icons/ethereum.png">
+                    </td>
+                    <td class="left">
+                        <div class="dollar_column">
+                            <div class="value" id="eth">...</div>
+                        </div>
+                    </td>
+                    <td class="right"> 
+                        <div class="btc_column">
+                            <div class="value" id="eth_btc">...</div>
+                        </div>
+                    </td>
                 </tr>
-                <tr id="topField">
-                    <td class="left2"><img src="icons/ethereum-classic.png"></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="etc">...</div></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="etc_btc">...</div></td>
+                <tr>
+                    <td class="icon">
+                        <img src="icons/ethereum-classic.png">
+                    </td>
+                    <td class="left">
+                        <div class="dollar_column">
+                            <div class="value" id="etc">...</div>
+                        </div>
+                    </td>
+                    <td class="right"> 
+                        <div class="btc_column">
+                            <div class="value" id="etc_btc">...</div>
+                        </div>
+                    </td>
                 </tr>
-                <tr id="topField">
-                    <td class="left2"><img src="icons/zcash.png"></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="zec">...</div></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="zec_btc">...</div></td>
+                <tr>
+                    <td class="icon">
+                        <img src="icons/zcash.png">
+                    </td>
+                    <td class="left">
+                        <div class="dollar_column">
+                            <div class="value" id="zec">...</div>
+                        </div>
+                    </td>
+                    <td class="right"> 
+                        <div class="btc_column">
+                            <div class="value" id="zec_btc">...</div>
+                        </div>
+                    </td>
                 </tr>
-                <tr id="topField">
-                    <td class="left2"><img src="icons/zclassic.png"></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="zcl">...</div></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="zcl_btc">...</div></td>
+                <tr>
+                    <td class="icon">
+                        <img src="icons/zclassic.png">
+                    </td>
+                    <td class="left">
+                        <div class="dollar_column">
+                            <div class="value" id="zcl">...</div>
+                        </div>
+                    </td>
+                    <td class="right"> 
+                        <div class="btc_column">
+                            <div class="value" id="zcl_btc">...</div>
+                        </div>
+                    </td>
                 </tr>
-                <tr id="topField">
-                    <td class="left2"><img src="icons/zencash.png"></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="zen">...</div></td>
-                    <td class="right"><div class="valueBackground2"></div>
-                    <div class="value2" id="zen_btc">...</div></td>
+                <tr>
+                    <td class="icon">
+                        <img src="icons/zencash.png">
+                    </td>
+                    <td class="left">
+                        <div class="dollar_column">
+                            <div class="value" id="zen">...</div>
+                        </div>
+                    </td>
+                    <td class="right"> 
+                        <div class="btc_column">
+                            <div class="value" id="zen_btc">...</div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
         <div id="BtgDIV">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <tr id="topField">
-                    <td class="left2"><img src="icons/bitcoin-gold.png"></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="btg_curr_hash">...</div></td>
-                </tr>
-            </table>
+            <div class="container-middle">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td class="icon">
+                            <img src="icons/bitcoin-gold.png">
+                        </td>
+                        <td>
+                            <div class="mining_stats">
+                                <div class="value" id="btg_curr_hash">...</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div id="ZenDIV">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <tr id="topField">
-                    <td class="left2"><img src="icons/zencash.png"></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="zen_curr_hash">...</div></td>
-                </tr>
-            </table>
+            <div class="container-middle">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td class="icon">
+                            <img src="icons/zencash.png">
+                        </td>
+                        <td>
+                            <div class="mining_stats">
+                                <div class="value" id="zen_curr_hash">...</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div id="EthDIV">
             <img src="icons/ethereum.png">Ethermine
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr id="topField">
-                    <td class="left2"><strong>Now</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="eth_curr_hash">...</div></td>
+                    <td class="icon">
+                        Now
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="eth_curr_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Avg</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="eth_avg_hash">...</div></td>
+                    <td class="icon">
+                        Avg
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="eth_avg_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Upd</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="eth_last_seen">...</div></td>
+                    <td class="icon">
+                        Upd
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="eth_last_seen">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Coin</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="eth_coins">...</div></td>
+                    <td class="icon">
+                        Coin
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="eth_coins">...</div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -123,49 +218,69 @@
             <img src="icons/ethereum.png">Nanopool
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr id="topField">
-                    <td class="left2"><strong>Now</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="eth_nano_curr_hash">...</div></td>
+                    <td class="icon">
+                        Now
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="eth_nano_curr_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Avg</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="eth_nano_avg_hash">...</div></td>
+                    <td class="icon">
+                        Avg
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="eth_nano_avg_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Bal</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="eth_nano_balance">...</div></td>
-                </tr>
-                <tr id="topField">
-                    <td class="left2"><strong>Coin</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="eth_nano_coins">...</div></td>
+                    <td class="icon">
+                        Bal
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="eth_nano_balance">...</div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
         <div id="EtcDIV">
-            <img src="icons/ethereum-classic.png">ETC
+            <img src="icons/ethereum-classic.png">Nanopool
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr id="topField">
-                    <td class="left2"><strong>Now</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="etc_curr_hash">...</div></td>
+                    <td class="icon">
+                        Now
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="etc_nano_curr_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Avg</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="etc_avg_hash">...</div></td>
+                    <td class="icon">
+                        Avg
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="etc_nano_avg_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Upd</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="etc_last_seen">...</div></td>
-                </tr>
-                <tr id="topField">
-                    <td class="left2"><strong>Coin</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="etc_coins">...</div></td>
+                    <td class="icon">
+                        Bal
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="etc_nano_balance">...</div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -173,24 +288,44 @@
             <img src="icons/zcash.png">Flypool
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr id="topField">
-                    <td class="left2"><strong>Now</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="zec_curr_hash">...</div></td>
+                    <td class="icon">
+                        Now
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="zec_curr_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Avg</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="zec_avg_hash">...</div></td>
+                    <td class="icon">
+                        Avg
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="zec_avg_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Upd</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="zec_last_seen">...</div></td>
+                    <td class="icon">
+                        Upd
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="zec_last_seen">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                        <td class="left2"><strong>Coin</strong></td>
-                        <td class="right2"><div class="valueBackground"></div>
-                        <div class="value2" id="zec_coins">...</div></td>
+                    <td class="icon">
+                        Coin
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="zec_coins">...</div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -198,24 +333,44 @@
             <img src="icons/bitcoinz.png">Bitcoin Z
             <table cellpadding="0" cellspacing="0" border="0">
                 <tr id="topField">
-                    <td class="left2"><strong>Now</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="btz_curr_hash">...</div></td>
+                    <td class="icon">
+                        Now
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="btz_curr_hash">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Bal</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="btz_immature">...</div></td>
+                    <td class="icon">
+                        Bal
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="btz_immature">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                    <td class="left2"><strong>Paid</strong></td>
-                    <td class="right2"><div class="valueBackground"></div>
-                    <div class="value2" id="btz_paid">...</div></td>
+                    <td class="icon">
+                        Pai>
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="btz_paid">...</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr id="topField">
-                        <td class="left2"><strong>Upd</strong></td>
-                        <td class="right2"><div class="valueBackground"></div>
-                        <div class="value2" id="btz_last_seen">...</div></td>
+                    <td class="icon">
+                        Upd
+                    </td>
+                    <td>
+                        <div class="mining_stats">
+                            <div class="value" id="btz_last_seen">...</div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
