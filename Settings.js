@@ -9,6 +9,7 @@ function load() {
     document.getElementById('etc_show').checked = System.Gadget.Settings.read("etc_show");
     document.getElementById('btg_show').checked = System.Gadget.Settings.read("btg_show");
     document.getElementById('btz_show').checked = System.Gadget.Settings.read("btz_show");
+    document.getElementById('zcl_show').checked = System.Gadget.Settings.read("zcl_show");
     document.getElementById('zen_show').checked = System.Gadget.Settings.read("zen_show");
 
     document.getElementById('ethermine_show').checked = System.Gadget.Settings.read("ethermine_show");
@@ -23,7 +24,8 @@ function load() {
     document.getElementById('zec_addr').innerText = System.Gadget.Settings.readString("zec_addr");
     document.getElementById('eth_addr').innerText = System.Gadget.Settings.readString("eth_addr");
     document.getElementById('etc_addr').innerText = System.Gadget.Settings.readString("etc_addr");
-
+    document.getElementById('zcl_addr').innerText = System.Gadget.Settings.readString("zcl_addr");
+    document.getElementById('zen_addr').innerText = System.Gadget.Settings.readString("zen_addr");
 }
 
 function check(show) {
@@ -68,6 +70,7 @@ function onClosing(event) {
         System.Gadget.Settings.write("etc_show", document.getElementById("etc_show").checked);
         System.Gadget.Settings.write("btg_show", document.getElementById("btg_show").checked);
         System.Gadget.Settings.write("btz_show", document.getElementById("btz_show").checked);
+        System.Gadget.Settings.write("zcl_show", document.getElementById("zcl_show").checked);
         System.Gadget.Settings.write("zen_show", document.getElementById("zen_show").checked);
 
         System.Gadget.Settings.write("ethermine_show", document.getElementById("ethermine_show").checked);
@@ -76,6 +79,8 @@ function onClosing(event) {
         System.Gadget.Settings.writeString("zec_addr", trim(document.getElementById('zec_addr').value));
         System.Gadget.Settings.writeString("eth_addr", trim(document.getElementById('eth_addr').value));
         System.Gadget.Settings.writeString("etc_addr", trim(document.getElementById('etc_addr').value));
+        System.Gadget.Settings.writeString("zcl_addr", trim(document.getElementById('zcl_addr').value));
+        System.Gadget.Settings.writeString("zen_addr", trim(document.getElementById('zen_addr').value));
 
         event.cancel = false;
     }

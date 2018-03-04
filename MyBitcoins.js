@@ -4,17 +4,20 @@ var IMS = "If-Modified-Since";
 var OLD = "Thu, 01 Jun 1970 00:00:00 GMT";
 
 var zec_show = false;
-var etc_show = true;
+var etc_show = false;
 var btg_show = false;
 var btz_show = false;
-var zen_show = false;
-
-var eth_show = true;
+var zen_show = true;
+var zcl_show = true;
+var eth_show = false;
 var ethermine_show = false;
-var nanopool_show = true;
+var nanopool_show = false;
+
 var zec_addr = "t1aPosjaW4e2UHrnj5mXsHureUBnX1jLyuQ";
 var eth_addr = "e2d07294df04dae81aaef23a7194a3bd511a40bd";
 var etc_addr = "0x42bf31f75b0d1b2bfa0c41e62470d2bba007b99a";
+var zcl_addr = "t1ZZgre1t73hMFFJPyJzMsnQZCA66T74ft4";
+var zen_addr = "znbyDPJ4TVC2Xz4GhGXKia6VjuY11fmbK7X";
 
 // update intervals
 var ONE_SEC = 1000;  // 1 sec
@@ -43,6 +46,7 @@ document.onreadystatechange = function() {
             System.Gadget.Settings.write("etc_show", etc_show);
             System.Gadget.Settings.write("btg_show", btg_show);
             System.Gadget.Settings.write("btz_show", btz_show);
+            System.Gadget.Settings.write("zcl_show", zcl_show);
             System.Gadget.Settings.write("zen_show", zen_show);
 
             System.Gadget.Settings.write('ethermine_show', ethermine_show);
@@ -51,6 +55,8 @@ document.onreadystatechange = function() {
             System.Gadget.Settings.writeString("zec_addr", zec_addr);
             System.Gadget.Settings.writeString("eth_addr", eth_addr);
             System.Gadget.Settings.writeString("etc_addr", etc_addr);
+            System.Gadget.Settings.writeString("zcl_addr", zcl_addr);
+            System.Gadget.Settings.writeString("zen_addr", zen_addr);
         }
 
         setInterval("load()", 60000);
@@ -68,6 +74,7 @@ function updateExchangeData() {
     etc_show = System.Gadget.Settings.read("etc_show");
     btg_show = System.Gadget.Settings.read("btg_show");
     btz_show = System.Gadget.Settings.read("btz_show");
+    zcl_show = System.Gadget.Settings.read("zcl_show");
     zen_show = System.Gadget.Settings.read("zen_show");
 
     ethermine_show = System.Gadget.Settings.read("ethermine_show");
@@ -81,12 +88,12 @@ function updateExchangeData() {
     document.getElementById('BtgDIV').style.display = "none";
     document.getElementById('BtzDIV').style.display = "none";
     document.getElementById('ZenDIV').style.display = "none";
+    document.getElementById('ZclDIV').style.display = "none";
 
     if (zec_show) {
         i = i + 1;
         document.getElementById('ZecDIV').style.display =  "block";
     }
-
     if (eth_show) {
         if (ethermine_show) {
             i = i + 1;
@@ -108,18 +115,23 @@ function updateExchangeData() {
         i = i + 1;
         document.getElementById('BtzDIV').style.display =  "block";
     }
+    if (zcl_show) {
+        i = i + 1;
+        document.getElementById('ZclDIV').style.display =  "block";
+    }
     if (zen_show) {
+        i = i + 1;
         document.getElementById('ZenDIV').style.display =  "block";
     }
 
     if (i === 0) {
-        document.body.style.height = "175px";
+        document.body.style.height = "205px";
     }
     else if (i === 1) {
         document.body.style.height = "300px";
     }
     else {
-        document.body.style.height = "380px";
+        document.body.style.height = "400px";
     }
 
     if (System.Gadget.Settings.readString("zec_addr")) {
@@ -130,6 +142,12 @@ function updateExchangeData() {
     }
     if (System.Gadget.Settings.readString("etc_addr")) {
         etc_addr = System.Gadget.Settings.readString("etc_addr");
+    }
+    if (System.Gadget.Settings.readString("zcl_addr")) {
+        zcl_addr = System.Gadget.Settings.readString("zcl_addr");
+    }
+    if (System.Gadget.Settings.readString("zen_addr")) {
+        zen_addr = System.Gadget.Settings.readString("zen_addr");
     }
 
     try {
@@ -369,27 +387,38 @@ function updateExchangeData() {
                 nanoCalcAddress = etc_nano_avg_hash.toFixed(0);
             }
         };
+        xmlHttpZenCash = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttpZenCash.open("GET", "https://minez.zone/api/worker_stats?" + zen_addr, true);
+        xmlHttpZenCash.setRequestHeader(IMS, OLD);
+        xmlHttpZenCash.send();
+        xmlHttpZenCash.onReadyStateChange = function() {
+            if (xmlHttpZenCash.readyState == 4 && xmlHttpZenCash.status == 200) {
+                var zen_curr_hash = parse(xmlHttpZenCash, "hashrateString", 0);
+                var zen_paid = parse(xmlHttpZenCash, "paid", 0);
+                var zen_balance = parse(xmlHttpZenCash, "balance", 0);
+                var zen_upd = parse(xmlHttpZenCash, "time", 0);
 
-        xmlHttpBitcoinGold = new ActiveXObject("Microsoft.XMLHTTP");
-        xmlHttpBitcoinGold.open("GET", "https://btg.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
-        xmlHttpBitcoinGold.setRequestHeader(IMS, OLD);
-        xmlHttpBitcoinGold.send();
-        xmlHttpBitcoinGold.onReadyStateChange = function() {
-            if (xmlHttpBitcoinGold.readyState == 4 && xmlHttpBitcoinGold.status == 200) {
-                var btg_curr_hash = parse(xmlHttpBitcoinGold, "hashrate", 0);
-                btg_curr_hash = (btg_curr_hash/1000).toFixed(0) + " H/s"
-                document.getElementById('btg_curr_hash').innerText = btg_curr_hash;
+                document.getElementById('zen_curr_hash').innerText = "zen_curr_hash";
+                document.getElementById('zen_paid').innerText = zen_paid;
+                document.getElementById('zen_balance').innerText = zen_balance;
+                document.getElementById('zen_balance').innerText = zen_upd;
             }
         };
-        xmlHttpZen = new ActiveXObject("Microsoft.XMLHTTP");
-        xmlHttpZen.open("GET", "https://zen.suprnova.cc/index.php?page=api&action=getuserstatus&api_key=b0c2b9a973b9080bfeefbbc04aea22d4befd4ad7945b3b85f3addacfa88f958c&id=201008300");
-        xmlHttpZen.setRequestHeader(IMS, OLD);
-        xmlHttpZen.send();
-        xmlHttpZen.onReadyStateChange = function() {
-            if (xmlHttpZen.readyState == 4 && xmlHttpZen.status == 200) {
-                var zen_curr_hash = parse(xmlHttpZen, "hashrate", 0);
-                zen_curr_hash = (zen_curr_hash/1000).toFixed(0) + " H/s"
-                document.getElementById('zen_curr_hash').innerText = zen_curr_hash;
+        xmlHttpZclassic = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttpZclassic.open("GET", "https://minez.zone/api/worker_stats?t1ZZgre1t73hMFFJPyJzMsnQZCA66T74ft4", true);
+        xmlHttpZclassic.setRequestHeader(IMS, OLD);
+        xmlHttpZclassic.send();
+        xmlHttpZclassic.onReadyStateChange = function() {
+            if (xmlHttpZclassic.readyState == 4 && xmlHttpZclassic.status == 200) {
+                var zcl_curr_hash = parse(xmlHttpZclassic, "hashrateString", 0);
+                var zcl_paid = parse(xmlHttpZclassic, "totalShares", 0);
+                var zcl_balance = parse(xmlHttpZclassic, "balance", 0);
+                var zcl_upd = parse(xmlHttpZclassic, "time", 0);
+
+                document.getElementById('zcl_curr_hash').innerText = "111";
+                document.getElementById('zcl_paid').innerText = zcl_paid;
+                document.getElementById('zcl_balance').innerText = zcl_balance;
+                document.getElementById('zcl_balance').innerText = zcl_upd;
             }
         };
     } catch (ex) {
