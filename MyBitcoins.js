@@ -7,8 +7,8 @@ var zec_show = false;
 var etc_show = false;
 var btg_show = false;
 var btz_show = false;
-var zen_show = true;
-var zcl_show = true;
+var zen_show = false;
+var zcl_show = false;
 var eth_show = false;
 var ethermine_show = false;
 var nanopool_show = false;
@@ -125,13 +125,13 @@ function updateExchangeData() {
     }
 
     if (i === 0) {
-        document.body.style.height = "205px";
+        document.body.style.height = "285px";
     }
     else if (i === 1) {
-        document.body.style.height = "300px";
+        document.body.style.height = "380px";
     }
     else {
-        document.body.style.height = "400px";
+        document.body.style.height = "480px";
     }
 
     if (System.Gadget.Settings.readString("zec_addr")) {
@@ -173,14 +173,14 @@ function updateExchangeData() {
             }
         };
 
-        xmlhttpBtg = new ActiveXObject("Microsoft.XMLHTTP");
-        xmlhttpBtg.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=BTG&tsyms=USD,BTC", true);
-        xmlhttpBtg.setRequestHeader(IMS, OLD);
-        xmlhttpBtg.send();
-        xmlhttpBtg.onReadyStateChange = function() {                 
-            if (xmlhttpBtg.readyState == 4 && xmlhttpBtg.status == 200) {
-                document.getElementById('btg').innerText = parse(xmlhttpBtg, "USD", 0).toFixed(0) + "$";
-                document.getElementById('btg_btc').innerText = parse(xmlhttpBtg, "BTC", 0).toFixed(4);
+        xmlhttpXrp = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpXrp.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=XRP&tsyms=USD,BTC", true);
+        xmlhttpXrp.setRequestHeader(IMS, OLD);
+        xmlhttpXrp.send();
+        xmlhttpXrp.onReadyStateChange = function() {                 
+            if (xmlhttpXrp.readyState == 4 && xmlhttpXrp.status == 200) {
+                document.getElementById('xrp').innerText = parse(xmlhttpXrp, "USD", 0).toFixed(2) + "$";
+                document.getElementById('xrp_btc').innerText = parse(xmlhttpXrp, "BTC", 0).toFixed(5);
             }
         };
 
@@ -216,16 +216,16 @@ function updateExchangeData() {
                 document.getElementById('zec_btc').innerText = parse(xmlhttpZec, "BTC", 0).toFixed(4);
             }
         };
-        xmlhttpZen = new ActiveXObject("Microsoft.XMLHTTP");
-        xmlhttpZen.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ZEN&tsyms=USD,BTC,ETH", true);
-        xmlhttpZen.setRequestHeader(IMS, OLD);
-        xmlhttpZen.send();
-        xmlhttpZen.onReadyStateChange = function() {                 
-            if (xmlhttpZen.readyState == 4 && xmlhttpZen.status == 200) {
-                document.getElementById('zen').innerText = parse(xmlhttpZen, "USD", 0).toFixed(0) + "$";
-                document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(4);
-            }
-        };
+        // xmlhttpZen = new ActiveXObject("Microsoft.XMLHTTP");
+        // xmlhttpZen.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ZEN&tsyms=USD,BTC,ETH", true);
+        // xmlhttpZen.setRequestHeader(IMS, OLD);
+        // xmlhttpZen.send();
+        // xmlhttpZen.onReadyStateChange = function() {                 
+        //     if (xmlhttpZen.readyState == 4 && xmlhttpZen.status == 200) {
+        //         document.getElementById('zen').innerText = parse(xmlhttpZen, "USD", 0).toFixed(0) + "$";
+        //         document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(4);
+        //     }
+        // };
         xmlhttpZcl = new ActiveXObject("Microsoft.XMLHTTP");
         xmlhttpZcl.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=ZCL&tsyms=USD,BTC,ETH", true);
         xmlhttpZcl.setRequestHeader(IMS, OLD);
@@ -246,6 +246,50 @@ function updateExchangeData() {
                 document.getElementById('zen_btc').innerText = parse(xmlhttpZen, "BTC", 0).toFixed(4);
             }
         };
+
+        xmlhttpRvn = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpRvn.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=RVN&tsyms=USD,BTC,ETH", true);
+        xmlhttpRvn.setRequestHeader(IMS, OLD);
+        xmlhttpRvn.send();
+        xmlhttpRvn.onReadyStateChange = function() {                 
+            if (xmlhttpRvn.readyState == 4 && xmlhttpRvn.status == 200) {
+                document.getElementById('rvn').innerText = parse(xmlhttpRvn, "USD", 0).toFixed(2) + "$";
+                document.getElementById('rvn_btc').innerText = parse(xmlhttpRvn, "BTC", 0).toFixed(5);
+            }
+        };
+
+        xmlhttpSc = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpSc.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=SC&tsyms=USD,BTC,ETH", true);
+        xmlhttpSc.setRequestHeader(IMS, OLD);
+        xmlhttpSc.send();
+        xmlhttpSc.onReadyStateChange = function() {                 
+            if (xmlhttpSc.readyState == 4 && xmlhttpSc.status == 200) {
+                document.getElementById('sc').innerText = parse(xmlhttpSc, "USD", 0).toFixed(3) + "$";
+                document.getElementById('sc_btc').innerText = parse(xmlhttpSc, "ETH", 0).toFixed(5);
+            }
+        };
+        xmlhttpNxt = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpNxt.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=NXT&tsyms=USD,BTC,ETH", true);
+        xmlhttpNxt.setRequestHeader(IMS, OLD);
+        xmlhttpNxt.send();
+        xmlhttpNxt.onReadyStateChange = function() {                 
+            if (xmlhttpNxt.readyState == 4 && xmlhttpNxt.status == 200) {
+                document.getElementById('nxt').innerText = parse(xmlhttpNxt, "USD", 0).toFixed(3) + "$";
+                document.getElementById('nxt_btc').innerText = parse(xmlhttpNxt, "ETH", 0).toFixed(5);
+            }
+        };
+
+        xmlhttpClo = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttpClo.open("GET", "https://min-api.cryptocompare.com/data/price?fsym=CLO&tsyms=USD,BTC,ETH", true);
+        xmlhttpClo.setRequestHeader(IMS, OLD);
+        xmlhttpClo.send();
+        xmlhttpClo.onReadyStateChange = function() {                 
+            if (xmlhttpClo.readyState == 4 && xmlhttpClo.status == 200) {
+                document.getElementById('clo').innerText = parse(xmlhttpClo, "USD", 0).toFixed(3) + "$";
+                document.getElementById('clo_btc').innerText = parse(xmlhttpClo, "ETH", 0).toFixed(5);
+            }
+        };
+
         xmlHttpBTCZ = new ActiveXObject("Microsoft.XMLHTTP");
         xmlHttpBTCZ.open("GET", "http://pool.bitcoinzguiding.ovh/api/worker_stats?t1TtaSf9NiLepNLRw5heMCuvLfueuBpG6zH", true);
         xmlHttpBTCZ.setRequestHeader(IMS, OLD);

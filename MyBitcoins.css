@@ -5,7 +5,7 @@ body {
   font: bold 10pt tahoma, sans-serif;
   color: #FCFCFC;
   margin: 0px;
-  padding: 5px;
+  padding: 0px;
   background: url(background.png) no-repeat;
   width: 125px;
   height: 175px;
@@ -19,11 +19,18 @@ div.container {
 }
 
 .value {
-  padding-right: 4px;
-  text-align: right;
+  text-align: center;
   font-weight: bold;
   font-size: 13px;
   color: black;
+}
+
+.small-font {
+  font-size: 11px;
+}
+
+.medium-font {
+  font-size: 12px;
 }
 
 div.container-middle {
@@ -35,7 +42,7 @@ div.container-middle {
   font-size: 13px;
   font-weight: bold;
   width: 10px;
-  padding-right: 2px;
+  padding-right: 1px;
 }
 
 .dollar_column {
@@ -43,7 +50,16 @@ div.container-middle {
   filter: alpha(opacity = 70);
   background-color: #fff;
   z-index: -100;
-  width: 44px;
+  width: 42px;
+  line-height: 19px;
+}
+
+.tiny-dollar_column {
+  position: relative;
+  filter: alpha(opacity = 70);
+  background-color: #fff;
+  z-index: -100;
+  width: 38px;
   line-height: 19px;
 }
 
@@ -61,7 +77,7 @@ td.left {
   filter: alpha(opacity = 70);
   background-color: #fff;
   z-index: -100;
-  width: 48px;
+  width: 52px;
   line-height: 19px;
 }
 
@@ -95,5 +111,5 @@ td.right {
 }
 
 #zec_last_seen {
-  font-size: 12px;
+  font-size: 11px;
 }
